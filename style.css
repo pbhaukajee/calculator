@@ -1,0 +1,60 @@
+body {
+  background-color: rgb(233, 237, 228);
+}
+
+#container {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  border: 2px solid black;
+  width: 400px;
+  height: 600px;
+  margin: 100px auto;
+  border-radius: 10px;
+  gap: 10px;
+  background-color: rgba(55, 132, 127, 0.529);
+}
+
+.display {
+  border: 2px solid black;
+  height: 100px;
+  width: auto;
+  text-align: center;
+  border-radius: 5px;
+  background-color: whitesmoke;
+}
+
+.input {
+  text-align: right;
+  padding: 15px;
+  margin-top: 30px;
+  font-size: x-large;
+}
+
+button {
+  width: 96px;
+  height: 93px;
+  cursor: pointer;
+  background-color: whitesmoke;
+  border-radius: 5px;
+  font-size: x-large;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.clear {
+  width: 197px;
+  background-color: rgba(226, 184, 87, 0.905);
+}
+
+.delete {
+  background-color: rgba(234, 81, 81, 0.842);
+}
+
+.zero {
+  width: 197px;
+}
