@@ -2,12 +2,23 @@ const input = document.querySelector(".input");
 const numbers = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
 const equal = document.querySelector(".equals");
+const clear = document.querySelector(".clear");
+const backSpace = document.querySelector(".delete");
 
 let firstNum = "";
 let secondNum = "";
 let operatorClicked = "";
 let calculation;
 let equalClicked = false;
+
+clear.addEventListener("click", () => {
+  clearAll();
+});
+
+backSpace.addEventListener("click", function () {
+  let newData = erase(input.textContent);
+  input.textContent = newData;
+});
 
 //Show numbers in display & store the values
 numbers.forEach((number) => {
@@ -83,7 +94,27 @@ function updateDisplay(outcome) {
   firstNum = "";
   secondNum = "";
   operatorClicked = "";
-  input.textContent = outcome;
+  let display = outcome.toString();
+  if (display.includes(".")) {
+    display = outcome.toFixed(2);
+    input.textContent = parseFloat(display);
+  } else {
+    input.textContent = outcome;
+  }
+}
+
+//clear everything
+function clearAll() {
+  firstNum = "";
+  secondNum = "";
+  operatorClicked = "";
+  input.textContent = "";
+}
+
+//delete item
+function erase(data) {
+  let newData = data.slice(0, -1);
+  return newData;
 }
 
 //Math formula
