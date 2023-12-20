@@ -12,6 +12,9 @@ let equalClicked = false;
 //Show numbers in display & store the values
 numbers.forEach((number) => {
   number.addEventListener("click", () => {
+    if (firstNum.length > 20 || secondNum.length > 20) {
+      return;
+    }
     if (equalClicked) {
       if (operatorClicked === "") {
         input.textContent = "";
@@ -22,9 +25,19 @@ numbers.forEach((number) => {
       equalClicked = false;
     }
     if (operatorClicked === "") {
+      if (number.textContent === ".") {
+        if (firstNum.includes(".")) {
+          return;
+        }
+      }
       firstNum += number.textContent;
       input.textContent += number.textContent;
     } else {
+      if (number.textContent === ".") {
+        if (secondNum.includes(".")) {
+          return;
+        }
+      }
       secondNum += number.textContent;
       input.textContent = secondNum;
     }
@@ -52,6 +65,9 @@ operators.forEach((operator) => {
 
 //Show the result
 equal.addEventListener("click", function () {
+  if (firstNum === "" && secondNum === "" && operatorClicked === "") {
+    return;
+  }
   calculation = operate(
     operatorClicked,
     parseFloat(firstNum),
