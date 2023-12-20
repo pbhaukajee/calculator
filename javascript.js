@@ -11,11 +11,12 @@ let calculation;
 //Show numbers in display & store the values
 numbers.forEach((number) => {
   number.addEventListener("click", () => {
-    input.textContent += number.textContent;
     if (operatorClicked === "") {
       firstNum += number.textContent;
+      input.textContent += number.textContent;
     } else {
       secondNum += number.textContent;
+      input.textContent = secondNum;
     }
   });
 });
@@ -23,7 +24,7 @@ numbers.forEach((number) => {
 //Select an operator
 operators.forEach((operator) => {
   operator.addEventListener("click", () => {
-    if (secondNum == "") {
+    if (secondNum === "") {
       operatorClicked = operator.textContent;
       input.textContent += operator.textContent;
     } else {
@@ -33,6 +34,8 @@ operators.forEach((operator) => {
         parseFloat(secondNum)
       );
       updateDisplay(calculation);
+      operatorClicked = operator.textContent;
+      firstNum = calculation;
     }
   });
 });
@@ -90,7 +93,7 @@ function operate(operator, num1, num2) {
       result = divide(num1, num2);
       break;
     default:
-      result = "Invalid";
+      result = num1;
       break;
   }
   return result;
