@@ -7,10 +7,20 @@ let firstNum = "";
 let secondNum = "";
 let operatorClicked = "";
 let calculation;
+let equalClicked = false;
 
 //Show numbers in display & store the values
 numbers.forEach((number) => {
   number.addEventListener("click", () => {
+    if (equalClicked) {
+      if (operatorClicked === "") {
+        input.textContent = "";
+        firstNum = "";
+      } else {
+        firstNum = calculation;
+      }
+      equalClicked = false;
+    }
     if (operatorClicked === "") {
       firstNum += number.textContent;
       input.textContent += number.textContent;
@@ -49,6 +59,7 @@ equal.addEventListener("click", function () {
   );
   updateDisplay(calculation);
   firstNum = calculation;
+  equalClicked = true;
 });
 
 //Show the result
