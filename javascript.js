@@ -94,13 +94,11 @@ function updateDisplay(outcome) {
   firstNum = "";
   secondNum = "";
   operatorClicked = "";
+
   let display = outcome.toString();
-  if (display.includes(".")) {
-    display = outcome.toFixed(2);
-    input.textContent = parseFloat(display);
-  } else {
-    input.textContent = outcome;
-  }
+  input.textContent = display.includes(".")
+    ? parseFloat(outcome.toFixed(2))
+    : outcome;
 }
 
 //clear everything
