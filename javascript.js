@@ -16,7 +16,7 @@ clear.addEventListener("click", () => {
 });
 
 backSpace.addEventListener("click", function () {
-  let newData = erase(input.textContent);
+  let newData = erase();
   input.textContent = newData;
 });
 
@@ -97,6 +97,10 @@ equal.addEventListener("click", function () {
   equalClicked = true;
 });
 
+function clickEqual() {
+  equal.click();
+}
+
 //Show the result
 function updateDisplay(outcome) {
   firstNum = "";
@@ -118,9 +122,8 @@ function clearAll() {
 }
 
 //delete item
-function erase(data) {
-  let newData = data.slice(0, -1);
-  return newData;
+function erase() {
+  return input.textContent.slice(0, -1);
 }
 
 //Math formula
@@ -162,3 +165,28 @@ function operate(operator, num1, num2) {
   }
   return result;
 }
+
+window.addEventListener("keydown", (e) => {
+  e.preventDefault();
+  if (
+    e.key === "0" ||
+    e.key === "1" ||
+    e.key === "2" ||
+    e.key === "3" ||
+    e.key === "4" ||
+    e.key === "5" ||
+    e.key === "6" ||
+    e.key === "7" ||
+    e.key === "8" ||
+    e.key === "9" ||
+    e.key === "."
+  ) {
+    numberClicked(e.key);
+  } else if (e.key === "+" || e.key === "-" || e.key === "*" || e.key === "/") {
+    operations(e.key);
+  } else if (e.key === "Enter" || e.key === "=") {
+    clickEqual();
+  } else if (e.key === "delete" || e.key === "Backspace") {
+    input.textContent = erase();
+  }
+});
