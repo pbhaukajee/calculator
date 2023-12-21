@@ -22,57 +22,65 @@ backSpace.addEventListener("click", function () {
 
 //Show numbers in display & store the values
 numbers.forEach((number) => {
-  number.addEventListener("click", () => {
+  number.addEventListener("click", function (e) {
     if (firstNum.length > 20 || secondNum.length > 20) {
       return;
     }
-    if (equalClicked) {
-      if (operatorClicked === "") {
-        input.textContent = "";
-        firstNum = "";
-      } else {
-        firstNum = calculation;
-      }
-      equalClicked = false;
-    }
-    if (operatorClicked === "") {
-      if (number.textContent === ".") {
-        if (firstNum.includes(".")) {
-          return;
-        }
-      }
-      firstNum += number.textContent;
-      input.textContent += number.textContent;
-    } else {
-      if (number.textContent === ".") {
-        if (secondNum.includes(".")) {
-          return;
-        }
-      }
-      secondNum += number.textContent;
-      input.textContent = secondNum;
-    }
+    numberClicked(e.target.textContent);
   });
 });
 
-//Select an operator
-operators.forEach((operator) => {
-  operator.addEventListener("click", () => {
-    if (secondNum === "") {
-      operatorClicked = operator.textContent;
-      input.textContent += operator.textContent;
+function numberClicked(value) {
+  if (equalClicked) {
+    if (operatorClicked === "") {
+      input.textContent = "";
+      firstNum = "";
     } else {
-      calculation = operate(
-        operatorClicked,
-        parseFloat(firstNum),
-        parseFloat(secondNum)
-      );
-      updateDisplay(calculation);
-      operatorClicked = operator.textContent;
       firstNum = calculation;
     }
+    equalClicked = false;
+  }
+  if (operatorClicked === "") {
+    if (value === ".") {
+      if (firstNum.includes(".")) {
+        return;
+      }
+    }
+    firstNum += value;
+    input.textContent += value;
+  } else {
+    if (value === ".") {
+      if (secondNum.includes(".")) {
+        return;
+      }
+    }
+    secondNum += value;
+    input.textContent = secondNum;
+  }
+}
+
+//Select an operator
+operators.forEach((operator) => {
+  operator.addEventListener("click", function (e) {
+    operations(e.target.textContent);
   });
 });
+
+function operations(data) {
+  if (secondNum === "") {
+    operatorClicked = data;
+    input.textContent += data;
+  } else {
+    calculation = operate(
+      operatorClicked,
+      parseFloat(firstNum),
+      parseFloat(secondNum)
+    );
+    updateDisplay(calculation);
+    operatorClicked = data;
+    firstNum = calculation;
+  }
+}
 
 //Show the result
 equal.addEventListener("click", function () {
